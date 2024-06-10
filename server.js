@@ -1,12 +1,12 @@
 const http = require('http');
 const fs = require('fs');
 const qs = require('node:querystring');
-const blogStr = require('./blogStr.js');
+const string = require('./string.js');
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     console.log('유효성 검사:', req.url);
-    fs.writeFileSync('./blog.html', blogStr.main, 'utf-8');
+    fs.writeFileSync('./blog.html', string.main, 'utf-8');
 
     let data = fs.readFileSync('./blog.html', 'utf-8');
 

@@ -1,5 +1,5 @@
 const blogStr = {
-  blog: (a) => {
+  blog: (title, content) => {
     return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,10 +9,10 @@ const blogStr = {
   </head>
   <body>
     <form action="/submit" method="post">
-      <label for="title">${a}</label><br />
-      <input type="text" name="title" id="title" /><br /><br />
+      <label for="${title}">제목</label><br />
+      <input type="text" name="${title}" id="${title}" /><br /><br />
       <label for="content">내용</label><br />
-      <input type="text" name="content" id="content" /><br /><br />
+      <input type="text" name="${content}" id="${content}" /><br /><br />
       <input type="submit" value="포스팅 하기" />
     </form>
   </body>
@@ -21,8 +21,8 @@ const blogStr = {
   },
 };
 
-let a = blogStr.blog('제목');
+// let a = blogStr.blog('제목');
 
-console.log(a);
+// console.log(a);
 
-// module.exports = blogStr;
+module.exports = blogStr;

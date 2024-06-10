@@ -6,9 +6,9 @@ const string = require('./string.js');
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     console.log('유효성 검사:', req.url);
-    fs.writeFileSync('./blog.html', string.main, 'utf-8');
+    fs.writeFileSync('./main.html', string.main, 'utf-8');
 
-    let data = fs.readFileSync('./blog.html', 'utf-8');
+    let data = fs.readFileSync('./main.html', 'utf-8');
 
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(data);

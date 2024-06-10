@@ -1,5 +1,5 @@
-const blogStr = {
-  blog: `<!DOCTYPE html>
+const string = {
+  main: `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,4 +19,4 @@ const blogStr = {
 `,
 };
 
-module.exports = blogStr;
+module.exports = string;

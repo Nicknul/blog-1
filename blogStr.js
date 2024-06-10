@@ -1,5 +1,5 @@
 const blogStr = {
-  blog: () => {
+  blog: (a) => {
     return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +9,7 @@ const blogStr = {
   </head>
   <body>
     <form action="/submit" method="post">
-      <label for="title"></label><br />
+      <label for="title">${a}</label><br />
       <input type="text" name="title" id="title" /><br /><br />
       <label for="content">내용</label><br />
       <input type="text" name="content" id="content" /><br /><br />
@@ -21,7 +21,7 @@ const blogStr = {
   },
 };
 
-let a = blogStr.blog();
+let a = blogStr.blog('제목');
 
 console.log(a);
 

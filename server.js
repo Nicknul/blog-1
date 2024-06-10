@@ -4,8 +4,8 @@ const qs = require('node:querystring');
 const blogStr = require('./blogStr.js');
 
 const server = http.createServer((req, res) => {
-  console.log('유효성 검사:', req.url);
   if (req.method === 'GET' && req.url === '/') {
+    console.log('유효성 검사:', req.url);
     fs.writeFileSync('./blog.html', blogStr.main, 'utf-8');
 
     let data = fs.readFileSync('./blog.html', 'utf-8');
@@ -14,6 +14,7 @@ const server = http.createServer((req, res) => {
     res.end(data);
   }
   if (req.method === 'POST' && req.url === '/submit') {
+    console.log('유효성 검사:', req.url);
     let body = '';
     req.on('data', (chunk) => {
       body += chunk.toString();

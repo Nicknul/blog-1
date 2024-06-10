@@ -1,5 +1,6 @@
 const blogStr = {
-  blog: `<!DOCTYPE html>
+  blog: () => {
+    return `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +9,7 @@ const blogStr = {
   </head>
   <body>
     <form action="/submit" method="post">
-      <label for="title">제목</label><br />
+      <label for="title"></label><br />
       <input type="text" name="title" id="title" /><br /><br />
       <label for="content">내용</label><br />
       <input type="text" name="content" id="content" /><br /><br />
@@ -16,7 +17,12 @@ const blogStr = {
     </form>
   </body>
 </html>
-`,
+`;
+  },
 };
 
-module.exports = blogStr;
+let a = blogStr.blog();
+
+console.log(a);
+
+// module.exports = blogStr;

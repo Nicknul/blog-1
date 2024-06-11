@@ -19,7 +19,7 @@ const filePath = {
   list: 'list',
   main: 'main.html',
   folder: (title) => {
-    return `list/${title}.html`;
+    return `list/${title}`;
   },
 };
 
@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
       let title = data.title;
       let content = data.content;
 
-      fileObject.write(filePath.folder(title), string.create(title, content));
+      fileObject.write(`${filePath.folder(title)}.html`, string.create(title, content));
 
       let list = fs.readdirSync('./list', 'utf-8');
 

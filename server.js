@@ -40,6 +40,7 @@ const server = http.createServer((req, res) => {
       // console.log(link);
 
       let second = string.main.replace('</form>', `</form><li><a href ="./list/${link}">${link}</a></li>`);
+      console.log(second);
     });
   }
 });

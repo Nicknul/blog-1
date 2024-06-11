@@ -30,10 +30,13 @@ const server = http.createServer((req, res) => {
       // console.log(list);
 
       let link = '';
+
       for (let element in list) {
-        link += list[element];
+        let data = fs.readFileSync(`./list/${list[element]}`);
+
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(data);
       }
-      console.log(link);
     });
   }
 });

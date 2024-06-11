@@ -59,6 +59,12 @@ const server = http.createServer((req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(data);
   }
+  if (req.url === '/a.html') {
+    let data = fs.readFileSync('./list/a.html', 'utf-8');
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(data);
+  }
 });
 
 const port = 8080;

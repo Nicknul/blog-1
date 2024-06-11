@@ -26,10 +26,10 @@ const server = http.createServer((req, res) => {
 
       fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
 
-      const list = fs.readdirSync('./list');
+      let list = fs.readdirSync('./list');
       // console.log(list);
 
-      const link = '';
+      let link = '';
       for (let element in list) {
         link += list[element];
       }

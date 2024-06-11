@@ -3,8 +3,6 @@ const fs = require('fs');
 const qs = require('node:querystring');
 const string = require('./string.js');
 
-const list = fs.readdirSync('./list');
-
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
     console.log('유효성 검사:', req.url);
@@ -28,6 +26,7 @@ const server = http.createServer((req, res) => {
 
       fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
 
+      const list = fs.readdirSync('./list');
       console.log(list);
     });
   }

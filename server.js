@@ -40,12 +40,22 @@ const server = http.createServer((req, res) => {
   }
   if (req.method === 'GET' && req.url === '/') {
     let list = fs.readdirSync('./list', 'utf-8');
-    console.log(list);
+    // console.log(list);
 
-    fs.writeFileSync('./main.html', string.main, 'utf-8');
+    let arr = [];
+    for (let element in list) {
+      arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
+    }
+
+    let mainAdd = string.main.replace(
+      '</form>',
+      `</form>
+      <ul>${arr.join('')}</ul>`
+    );
+
+    fs.writeFileSync('./main.html', mainAdd, 'utf-8');
 
     let data = fs.readFileSync('./main.html', 'utf-8');
-
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(data);
   }

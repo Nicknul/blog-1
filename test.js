@@ -5,7 +5,7 @@ let list = fs.readdirSync('./list');
 let link = '';
 
 for (let element in list) {
-  link = list;
+  link = list[element];
 }
 
 console.log(link);

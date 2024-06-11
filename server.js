@@ -33,14 +33,11 @@ const server = http.createServer((req, res) => {
 
       let list = fs.readdirSync('./list');
 
-      let link = '';
-      for (let element in list) {
-        link += list[element];
-      }
-      // console.log(link);
+      let arr = [];
 
-      let second = string.main.replace('</form>', `</form><li><a href ="./list/${link}">${link}</a></li>`);
-      console.log(second);
+      for (let element in list) {
+        arr.push(`<li>${list[element]}</li>`);
+      }
     });
   }
 });

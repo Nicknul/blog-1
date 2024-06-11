@@ -7,12 +7,17 @@ const filePath = require('./filePath.js');
 const fileObject = require('./fileObject.js');
 const mainAdd = require('./mainAdd.js');
 
+const forIn = (array, list) => {
+  for (let element in list) {
+    array.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
+  }
+};
+
 //todo-2 서버 생성
 const server = http.createServer((req, res) => {
   console.log('유효성 검사:', req.url);
   req.url = decodeURI(req.url);
 
-  let link = [];
   let arr = [];
   let list = fileObject.readdir(filePath.list);
 
@@ -29,10 +34,7 @@ const server = http.createServer((req, res) => {
       fileObject.write(`${filePath.folder(title)}.html`, string.create(title, content));
 
       let list = fileObject.readdir(filePath.list);
-
-      for (let element in list) {
-        arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
-      }
+      forIn(arr, list);
 
       fileObject.write(filePath.main, mainAdd(arr));
       let second = fileObject.read(filePath.main);
@@ -42,10 +44,7 @@ const server = http.createServer((req, res) => {
     });
   }
   if (req.method === 'GET' && req.url === '/') {
-    for (let element in list) {
-      arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
-      link.push(list[element]);
-    }
+    forIn(arr, list);
 
     fileObject.write(filePath.main, mainAdd(arr));
     let data = fileObject.read(filePath.main);

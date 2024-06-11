@@ -4,11 +4,9 @@ const qs = require('node:querystring');
 const string = require('./string.js');
 
 const server = http.createServer((req, res) => {
-  console.log('유효성 검사:', req.url);
-
   let link = [];
   let arr = [];
-
+  console.log('유효성 검사:', req.url);
   if (req.method === 'POST' && req.url === '/submit') {
     let body = '';
     req.on('data', (chunk) => {
@@ -25,7 +23,6 @@ const server = http.createServer((req, res) => {
 
       for (let element in list) {
         arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
-        link.push(list[element]);
       }
 
       let mainAdd = string.main.replace(
@@ -42,6 +39,13 @@ const server = http.createServer((req, res) => {
   }
 
   if (req.method === 'GET' && req.url === '/') {
+    let list = fs.readdirSync('./list', 'utf-8');
+
+    for (let element in list) {
+      arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
+      link.push(list[element]);
+    }
+
     let mainAdd = string.main.replace(
       '</form>',
       `</form>

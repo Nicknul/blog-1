@@ -1,10 +1,13 @@
 const http = require('http');
-const fs = require('fs');
 const qs = require('node:querystring');
+
+//todo-1 모듈화한 객체 불러오기
 const string = require('./string.js');
 const filePath = require('./filePath.js');
 const fileObject = require('./fileObject.js');
+const mainAdd = require('./mainAdd.js');
 
+//todo-2 서버 생성
 const server = http.createServer((req, res) => {
   console.log('유효성 검사:', req.url);
   req.url = decodeURI(req.url);
@@ -31,14 +34,9 @@ const server = http.createServer((req, res) => {
         arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
       }
 
-      let mainAdd = string.main.replace(
-        '</form>',
-        `</form>
-        <ul>${arr.join('')}</ul>`
-      );
-
-      fileObject.write(filePath.main, mainAdd);
+      fileObject.write(filePath.main, mainAdd(arr));
       let second = fileObject.read(filePath.main);
+
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(second);
     });
@@ -49,13 +47,7 @@ const server = http.createServer((req, res) => {
       link.push(list[element]);
     }
 
-    let mainAdd = string.main.replace(
-      '</form>',
-      `</form>
-      <ul>${arr.join('')}</ul>`
-    );
-
-    fileObject.write(filePath.main, mainAdd);
+    fileObject.write(filePath.main, mainAdd(arr));
     let data = fileObject.read(filePath.main);
 
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });

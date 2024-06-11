@@ -12,6 +12,13 @@ const fileObject = {
   },
 };
 
+const fileArray = {
+  main: 'main.html',
+  list: (title) => {
+    `list/${title}.html`;
+  },
+};
+
 const server = http.createServer((req, res) => {
   console.log('유효성 검사:', req.url);
   req.url = decodeURI(req.url);
@@ -30,7 +37,7 @@ const server = http.createServer((req, res) => {
       let title = data.title;
       let content = data.content;
 
-      fileObject.write(`list/${title}.html`, string.create(title, content));
+      fileObject.write(fileArray.list(title), string.create(title, content));
 
       let list = fs.readdirSync('./list', 'utf-8');
 
@@ -44,8 +51,8 @@ const server = http.createServer((req, res) => {
         <ul>${arr.join('')}</ul>`
       );
 
-      fs.writeFileSync('./main.html', mainAdd, 'utf-8');
-      let second = fs.readFileSync('./main.html', 'utf-8');
+      fileObject.write(fileArray.main, mainAdd);
+      let second = fileObject.read(fileArray.main);
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(second);
     });

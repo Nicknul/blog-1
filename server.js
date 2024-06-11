@@ -4,9 +4,13 @@ const qs = require('node:querystring');
 const string = require('./string.js');
 
 const server = http.createServer((req, res) => {
-  req.url = decodeURI(req.url);
   console.log('유효성 검사:', req.url);
+  req.url = decodeURI(req.url);
+
+  let link = [];
   let arr = [];
+  let list = fs.readdirSync('./list', 'utf-8');
+
   if (req.method === 'POST' && req.url === '/submit') {
     let body = '';
     req.on('data', (chunk) => {
@@ -16,7 +20,7 @@ const server = http.createServer((req, res) => {
       let data = qs.parse(body);
       let title = data.title;
       let content = data.content;
-
+      //todo-1 title, content가 들어간 html을 생성하기
       fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
 
       let list = fs.readdirSync('./list', 'utf-8');
@@ -37,10 +41,6 @@ const server = http.createServer((req, res) => {
       res.end(second);
     });
   }
-  let link = [];
-
-  let list = fs.readdirSync('./list', 'utf-8');
-
   if (req.method === 'GET' && req.url === '/') {
     for (let element in list) {
       arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);

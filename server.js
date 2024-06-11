@@ -4,7 +4,6 @@ const qs = require('node:querystring');
 const string = require('./string.js');
 
 const server = http.createServer((req, res) => {
-  let link = [];
   let arr = [];
   console.log('유효성 검사:', req.url);
   if (req.method === 'POST' && req.url === '/submit') {
@@ -37,6 +36,13 @@ const server = http.createServer((req, res) => {
       res.end(second);
     });
   }
+  let link = [];
+
+  let list = fs.readdirSync('./list', 'utf-8');
+
+  for (let element in list) {
+    link.push(list[element]);
+  }
 
   if (req.method === 'GET' && req.url === '/') {
     let list = fs.readdirSync('./list', 'utf-8');
@@ -55,12 +61,6 @@ const server = http.createServer((req, res) => {
     fs.writeFileSync('./main.html', mainAdd, 'utf-8');
 
     let data = fs.readFileSync('./main.html', 'utf-8');
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(data);
-  }
-  if (req.url === '/a.html') {
-    let data = fs.readFileSync('./list/a.html', 'utf-8');
-
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(data);
   }

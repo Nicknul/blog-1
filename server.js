@@ -4,17 +4,8 @@ const qs = require('node:querystring');
 const string = require('./string.js');
 
 const server = http.createServer((req, res) => {
-  if (req.method === 'GET' && req.url === '/') {
-    console.log('유효성 검사:', req.url);
-    fs.writeFileSync('./main.html', string.main, 'utf-8');
-
-    let data = fs.readFileSync('./main.html', 'utf-8');
-
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(data);
-  }
+  console.log('유효성 검사:', req.url);
   if (req.method === 'POST' && req.url === '/submit') {
-    console.log('유효성 검사:', req.url);
     let body = '';
     req.on('data', (chunk) => {
       body += chunk.toString();
@@ -27,7 +18,7 @@ const server = http.createServer((req, res) => {
       fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
 
       //todo-2 readdir 선언
-      let list = fs.readdirSync('./list');
+      let list = fs.readdirSync('./list', 'utf-8');
 
       //todo-3 readdir의 목록을 for...in를 통해 html에 나타나게 하기
       let arr = [];
@@ -46,6 +37,17 @@ const server = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(second);
     });
+  }
+  let list = fs.readdirSync('./list', 'utf-8');
+  console.log(list);
+
+  if (req.method === 'GET' && req.url === '/') {
+    fs.writeFileSync('./main.html', string.main, 'utf-8');
+
+    let data = fs.readFileSync('./main.html', 'utf-8');
+
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+    res.end(data);
   }
 });
 

@@ -38,10 +38,10 @@ const server = http.createServer((req, res) => {
       res.end(second);
     });
   }
-  let list = fs.readdirSync('./list', 'utf-8');
-  console.log(list);
-
   if (req.method === 'GET' && req.url === '/') {
+    let list = fs.readdirSync('./list', 'utf-8');
+    console.log(list);
+
     fs.writeFileSync('./main.html', string.main, 'utf-8');
 
     let data = fs.readFileSync('./main.html', 'utf-8');

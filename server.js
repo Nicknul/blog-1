@@ -26,13 +26,20 @@ const server = http.createServer((req, res) => {
 
       fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
 
-      let frist = fs.readFileSync(`./list/${title}.html`, 'utf-8');
+      // let frist = fs.readFileSync(`./list/${title}.html`, 'utf-8');
 
-      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-      res.end(frist);
+      // res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      // res.end(frist);
 
       let list = fs.readdirSync('./list');
-      // console.log(list);
+
+      let link = '';
+      for (let element in list) {
+        link += list[element];
+      }
+      // console.log(link);
+
+      let second = string.main.replace('</form>', `</form><li><a href ="./list/${link}">${link}</a></li>`);
     });
   }
 });

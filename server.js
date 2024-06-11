@@ -10,12 +10,16 @@ const fileObject = {
   write: (path, data) => {
     return fs.writeFileSync(`./${path}`, data, 'utf-8');
   },
+  readdir: (path) => {
+    return fs.readdirSync(`./${path}`, 'utf-8');
+  },
 };
 
-const fileArray = {
+const filePath = {
+  list: 'list',
   main: 'main.html',
-  list: (title) => {
-    `list/${title}.html`;
+  folder: (title) => {
+    return `list/${title}.html`;
   },
 };
 
@@ -25,7 +29,7 @@ const server = http.createServer((req, res) => {
 
   let link = [];
   let arr = [];
-  let list = fs.readdirSync('./list', 'utf-8');
+  let list = fileObject.readdir(filePath.list);
 
   if (req.method === 'POST' && req.url === '/submit') {
     let body = '';
@@ -37,7 +41,7 @@ const server = http.createServer((req, res) => {
       let title = data.title;
       let content = data.content;
 
-      fileObject.write(fileArray.list(title), string.create(title, content));
+      fileObject.write(filePath.folder(title), string.create(title, content));
 
       let list = fs.readdirSync('./list', 'utf-8');
 
@@ -51,8 +55,8 @@ const server = http.createServer((req, res) => {
         <ul>${arr.join('')}</ul>`
       );
 
-      fileObject.write(fileArray.main, mainAdd);
-      let second = fileObject.read(fileArray.main);
+      fileObject.write(filePath.main, mainAdd);
+      let second = fileObject.read(filePath.main);
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(second);
     });
@@ -69,14 +73,15 @@ const server = http.createServer((req, res) => {
       <ul>${arr.join('')}</ul>`
     );
 
-    fs.writeFileSync('./main.html', mainAdd, 'utf-8');
+    fileObject.write(filePath.main, mainAdd);
+    let data = fileObject.read(filePath.main);
 
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(fileObject.read('main.html'));
+    res.end(data);
   }
   for (let element in list) {
     if (req.method === 'GET' && req.url === `/${list[element]}`) {
-      let data = fs.readFileSync(`./list/${list[element]}`, 'utf-8');
+      let data = fileObject.read(filePath.folder(list[element]));
 
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
       res.end(data);

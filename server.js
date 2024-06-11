@@ -2,7 +2,6 @@ const http = require('http');
 const fs = require('fs');
 const qs = require('node:querystring');
 const string = require('./string.js');
-const list = require('./list.js');
 
 const server = http.createServer((req, res) => {
   if (req.method === 'GET' && req.url === '/') {
@@ -26,6 +25,8 @@ const server = http.createServer((req, res) => {
       let content = data.content;
 
       fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
+
+      const list = fs.readdirSync('./list');
 
       console.log(list);
     });

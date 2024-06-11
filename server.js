@@ -40,7 +40,7 @@ const server = http.createServer((req, res) => {
         `</form>
         <ul>${arr.join('')}</ul>`
       );
-      //todo-5 POST 데이터 받기가 끝나면 조립한 데이터가 들어간 main.html을 다시 만드는 작업
+      //todo-5 POST 데이터 받기가 끝나면 조립한 데이터가 들어간 main.html을 다시 생성하고 생성한 파일 읽기
       fs.writeFileSync('./main.html', mainAdd, 'utf-8');
       let second = fs.readFileSync('./main.html', 'utf-8');
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });

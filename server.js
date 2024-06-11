@@ -2,26 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const qs = require('node:querystring');
 const string = require('./string.js');
-
-const fileObject = {
-  read: (path) => {
-    return fs.readFileSync(`./${path}`, 'utf-8');
-  },
-  write: (path, data) => {
-    return fs.writeFileSync(`./${path}`, data, 'utf-8');
-  },
-  readdir: (path) => {
-    return fs.readdirSync(`./${path}`, 'utf-8');
-  },
-};
-
-const filePath = {
-  list: 'list',
-  main: 'main.html',
-  folder: (title) => {
-    return `list/${title}`;
-  },
-};
+const filePath = require('./filePath.js');
+const fileObject = require('./fileObject.js');
 
 const server = http.createServer((req, res) => {
   console.log('유효성 검사:', req.url);
@@ -43,7 +25,7 @@ const server = http.createServer((req, res) => {
 
       fileObject.write(`${filePath.folder(title)}.html`, string.create(title, content));
 
-      let list = fs.readdirSync('./list', 'utf-8');
+      let list = fileObject.readdir(filePath.list);
 
       for (let element in list) {
         arr.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);

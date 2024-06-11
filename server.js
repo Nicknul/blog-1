@@ -6,12 +6,7 @@ const string = require('./string.js');
 const filePath = require('./filePath.js');
 const fileObject = require('./fileObject.js');
 const mainAdd = require('./mainAdd.js');
-
-const forIn = (array, list) => {
-  for (let element in list) {
-    array.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
-  }
-};
+const forIn = require('./forIn.js');
 
 //todo-2 서버 생성
 const server = http.createServer((req, res) => {

@@ -3,9 +3,12 @@ const fs = require('fs');
 const qs = require('node:querystring');
 const string = require('./string.js');
 
-const a = {
+const fileObject = {
   read: (path) => {
     return fs.readFileSync(`./${path}`, 'utf-8');
+  },
+  write: (path, data) => {
+    return fs.writeFileSync(`./${path}`, data, 'utf-8');
   },
 };
 
@@ -27,7 +30,7 @@ const server = http.createServer((req, res) => {
       let title = data.title;
       let content = data.content;
 
-      fs.writeFileSync(`./list/${title}.html`, string.create(title, content), 'utf-8');
+      fileObject.write(`list/${title}.html`, string.create(title, content));
 
       let list = fs.readdirSync('./list', 'utf-8');
 
@@ -61,9 +64,8 @@ const server = http.createServer((req, res) => {
 
     fs.writeFileSync('./main.html', mainAdd, 'utf-8');
 
-    // let data = fs.readFileSync('./main.html', 'utf-8');
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(a.read('main.html'));
+    res.end(fileObject.read('main.html'));
   }
   for (let element in list) {
     if (req.method === 'GET' && req.url === `/${list[element]}`) {

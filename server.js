@@ -38,6 +38,12 @@ const server = http.createServer((req, res) => {
       for (let element in list) {
         arr.push(`<li>${list[element]}</li>`);
       }
+
+      let mainAdd = string.main.replace(
+        '</form>',
+        `</form>
+        <div>${arr.join('')}</div>`
+      );
     });
   }
 });

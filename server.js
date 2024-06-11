@@ -40,10 +40,6 @@ const server = http.createServer((req, res) => {
 
   let list = fs.readdirSync('./list', 'utf-8');
 
-  for (let element in list) {
-    link.push(list[element]);
-  }
-
   if (req.method === 'GET' && req.url === '/') {
     let list = fs.readdirSync('./list', 'utf-8');
 
@@ -63,6 +59,14 @@ const server = http.createServer((req, res) => {
     let data = fs.readFileSync('./main.html', 'utf-8');
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(data);
+  }
+  for (let element in list) {
+    if (req.method === 'GET' && req.url === `/${list[element]}`) {
+      let data = fs.readFileSync(`./list/${list[element]}`, 'utf-8');
+
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(data);
+    }
   }
 });
 

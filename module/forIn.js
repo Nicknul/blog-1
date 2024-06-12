@@ -1,6 +1,7 @@
 const forIn = (array, list) => {
   for (let element in list) {
-    array.push(`<div><a href="${list[element]}">${list[element]}</a></div>`);
+    let a = list[element].split('.html');
+    array.push(`<div><a href="${list[element]}">${a.join('')}</a></div>`);
   }
 };
 

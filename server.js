@@ -2,11 +2,11 @@ const http = require('http');
 const qs = require('node:querystring');
 
 //todo-1 모듈화한 객체 불러오기
-const string = require('./string.js');
-const filePath = require('./filePath.js');
-const fileObject = require('./fileObject.js');
-const mainAdd = require('./mainAdd.js');
-const forIn = require('./forIn.js');
+const string = require('./module/string.js');
+const filePath = require('./module/filePath.js');
+const fileObject = require('./module/fileObject.js');
+const mainAdd = require('./module/mainAdd.js');
+const forIn = require('./module/forIn.js');
 
 //todo-2 서버 생성
 const server = http.createServer((req, res) => {

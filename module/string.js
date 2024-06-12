@@ -1,3 +1,8 @@
+/**
+ * *2024.06.12
+ * * html 문자열 변환
+ */
+
 const string = {
   main: `<!DOCTYPE html>
 <html lang="en">

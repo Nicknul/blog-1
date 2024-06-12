@@ -1,5 +1,9 @@
 const fs = require('fs');
 
+/**
+ * *2024.06.12
+ * * 파일 읽고 쓰기
+ */
 const fileObject = {
   read: (path) => {
     return fs.readFileSync(`./${path}`, 'utf-8');

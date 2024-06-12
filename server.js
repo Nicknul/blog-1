@@ -55,13 +55,13 @@ const server = http.createServer((req, res) => {
       res.end(data);
     }
   }
-  if (req.method === 'GET' && req.url === '/main.css') {
+  if (req.method === 'GET' && req.url === `/${filePath.css[0]}`) {
     let data = fileObject.read(filePath.css[0]);
 
     res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
     res.end(data);
   }
-  if (req.method === 'GET' && req.url === '/list.css') {
+  if (req.method === 'GET' && req.url === `/${filePath.css[1]}`) {
     let data = fileObject.read(filePath.css[1]);
 
     res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });

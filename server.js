@@ -55,6 +55,12 @@ const server = http.createServer((req, res) => {
       res.end(data);
     }
   }
+  if (req.method === 'GET' && req.url === '/main.css') {
+    let data = fileObject.read(filePath.css);
+
+    res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
+    res.end(data);
+  }
 });
 
 const port = 8080;

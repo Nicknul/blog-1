@@ -27,12 +27,19 @@ const string = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="list.css" />
     <title>${title}</title>
   </head>
   <body>
-    <a href="/">HOME</a>
-    <h1>${title}</h1>
-    <div>${content}</div>
+    <div id="top"><div>${title}</div></div>
+    <div id="root">
+      <div><a href="/">HOME</a></div>
+    </div>
+    <div id="content">
+      <h2>${title}</h2>
+      <div>${content}</div>
+    </div>
   </body>
 </html>`;
   },

@@ -1,7 +1,7 @@
 const filePath = {
   list: 'list',
   main: 'main.html',
-  css: 'main.css',
+  css: ['main.css', 'list.css'],
   folder: (title) => {
     return `list/${title}`;
   },

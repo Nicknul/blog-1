@@ -7,6 +7,7 @@ const string = {
     <title>MAIN</title>
   </head>
   <body>
+    <div id="root"></div>
     <form action="/submit" method="post">
       <label for="title">제목</label><br />
       <input type="text" name="title" id="title" /><br /><br />
@@ -26,9 +27,9 @@ const string = {
     <title>${title}</title>
   </head>
   <body>
+    <a href="/">HOME</a>
     <h1>${title}</h1>
     <div>${content}</div>
-    <a href="/">HOME</a>
   </body>
 </html>`;
   },

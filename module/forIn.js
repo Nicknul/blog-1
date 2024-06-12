@@ -1,6 +1,6 @@
 const forIn = (array, list) => {
   for (let element in list) {
-    array.push(`<li><a href="${list[element]}">${list[element]}</a></li>`);
+    array.push(`<div><a href="${list[element]}">${list[element]}</a></div>`);
   }
 };
 

@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  background-color: lightgray;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+#top {
+  height: 4.5vh;
+  background-color: rgb(105, 105, 105);
+  box-shadow: 0px 3px 4px rgb(145, 145, 145);
+  position: relative;
+}
+
+#root {
+  display: flex;
+}
+
+a {
+  margin: 1vw;
+  text-decoration: none;
+  color: black;
+}
+
+/* *margin */
+#root,
+form {
+  margin: 3vw;
+}
+
+#title,
+#content {
+  width: 35vw;
+  padding: 1vw;
+  background-color: white;
+  border: solid lightgray;
+  box-shadow: inset 0px 0px 5px 1px darkgray;
+}
+#title,
+textarea:focus {
+  outline: none;
+}
+
+#content {
+  height: 25vh;
+}
+
+#submit {
+  width: 5vw;
+  height: 3vh;
+}

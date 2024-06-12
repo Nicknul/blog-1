@@ -56,7 +56,13 @@ const server = http.createServer((req, res) => {
     }
   }
   if (req.method === 'GET' && req.url === '/main.css') {
-    let data = fileObject.read(filePath.css);
+    let data = fileObject.read(filePath.css[0]);
+
+    res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
+    res.end(data);
+  }
+  if (req.method === 'GET' && req.url === '/list.css') {
+    let data = fileObject.read(filePath.css[1]);
 
     res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
     res.end(data);
